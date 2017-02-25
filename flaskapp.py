@@ -31,6 +31,7 @@ Routes:
 /createGroup                            POST    createGroup()
 /updateLoc                              POST    updateLoc()
 /groupUpdate/<groupCode>                GET     groupUpdate(groupCode)
+/groupEnd/<groupCode>                   GET     groupEnd(groupEnd)
 """
 #@app.after_request
 #def after_request(response):
@@ -53,7 +54,7 @@ def joinGroup(groupCode):
     return rh.joinGroup(app, groupClient, groupCode)
 
 # Create group
-@app.route('',methods=['POST'])
+@app.route('/createGroup',methods=['POST'])
 @cross_origin()
 def createGroup():
     return rh.createGroup(app, groupClient)
