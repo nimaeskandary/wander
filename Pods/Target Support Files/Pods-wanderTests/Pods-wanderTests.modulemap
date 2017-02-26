@@ -1,0 +1,6 @@
+framework module Pods_wanderTests {
+  umbrella header "Pods-wanderTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
