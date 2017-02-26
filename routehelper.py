@@ -30,7 +30,7 @@ def joinGroup(app, groupClient, groupCode):
     if (not (groupCode in groupClient.db.collection_names())):
         abort(404)
     #Add member to group in MONGO
-    group = groupClient.db[groupCode].find()
+    group.count() = groupClient.db[groupCode].find()
     if group > 1: #too many listings or none (should not be encountered)
         abort(400)
     doc = group
@@ -78,7 +78,7 @@ def updateLoc(app, groupClient):
     if (not (request.json["groupCode"] in groupClient.db.collection_names())):
         abort(404)
     #Update member location
-    group = groupClient.db[request.json["groupCode"]].find()
+    group.count() = groupClient.db[request.json["groupCode"]].find()
     if group > 1: #too many listings or none (should not be encountered)
         abort(400)
     doc = group
@@ -102,7 +102,7 @@ def groupUpdate(app, groupClient, groupCode):
     if (not (groupCode in groupClient.db.collection_names())):
         abort(404)
     #Check currently stored distance of members in group
-    group = groupClient.db[request.json["groupCode"]].find()
+    group.count() = groupClient.db[request.json["groupCode"]].find()
     if group > 1: #too many listings or none (should not be encountered)
         abort(400)
     #Get leader coords & member coords
