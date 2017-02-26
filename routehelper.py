@@ -24,7 +24,7 @@ def home_page(app, client):
         return jsonify({'response': "This is the home page for wander; please make a specific request"}), 200
 
 def joinGroup(app, groupClient, groupCode):
-    if not request.json or not ("dispName" in request.json):
+    if not request.json or not all(key in request.json for key in ("dispName","loc")) or not len(request.json["loc"]) == 2:
         abort(400) # Bad request
     #Validate group code in MONGO
     if (not (groupCode.upper() in groupClient.db.collection_names())):
@@ -48,7 +48,7 @@ def joinGroup(app, groupClient, groupCode):
     return jsonify(d), 200
 
 def createGroup(app, groupClient):
-    if not request.json or not all(key in request.json for key in ("groupName","dispName","triggerDist")):
+    if not request.json or not all(key in request.json for key in ("groupName","dispName","triggerDist","loc")) or not len(request.json["loc"]) == 2:
         abort(400) # Bad request
     #Generate group code & validate not existing
     d = {}
