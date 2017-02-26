@@ -37,7 +37,7 @@ def joinGroup(app, groupClient, groupCode):
     user = {}
     user["dispName"] = request.json["dispName"]
     user["level"] = "m"
-    user["location"] = []
+    user["location"] = request.json["loc"]
     memberList = doc["memberList"]
     memberList.append(user)
     doc["memberList"] = memberList
@@ -68,7 +68,7 @@ def createGroup(app, groupClient):
     leader = {}
     leader["dispName"] = request.json["dispName"]
     leader["level"] = "l"
-    leader["location"] = []
+    leader["location"] = request.json["loc"]
     memberList.append(leader)
     doc["memberList"] = memberList
     result = groupClient.db[d["groupCode"]].insert_one(doc)
