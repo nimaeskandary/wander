@@ -148,6 +148,7 @@ def dist(a,b):
     return math.sqrt(math.pow((a[0]-b[0]), 2) + math.pow((a[1]-b[1]), 2))
 
 def latlongdist(a,b):
+    print("LatA: " + str(a[0]) + ", LongA: " + str(a[1]) + "; LatB: " + str(b[0]) + ", LongB: " + str(b[1]), file=sys.stderr)
     rad = 6371
     latdiff = b[0] - a[0]
     dlat = latdiff * (math.pi/180.0)
