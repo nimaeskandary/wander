@@ -80,6 +80,7 @@ def updateLoc(app, groupClient):
         abort(400) # Bad request
     #Validate group code
     if (not (request.json["groupCode"].upper() in groupClient.db.collection_names())):
+        print(groupClient.db.collection_names(), file=sys.stderr)
         abort(404)
     #Update member location
     group = groupClient.db[request.json["groupCode"].upper()].find()
@@ -88,6 +89,7 @@ def updateLoc(app, groupClient):
     doc = group.next()
     #Validate member
     if not request.json["dispName"] in doc["memberList"]:
+        print(doc["memberList"], file=sys.stderr)
         abort(404)
     #Update location for user
     for item in doc["memberList"]:
