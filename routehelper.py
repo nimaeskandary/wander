@@ -76,6 +76,9 @@ def createGroup(app, groupClient):
     return jsonify(d), 200
 
 def updateLoc(app, groupClient):
+    d = {}
+    d["lostList"] = []
+    d["status"] = ""
     if not request.json or not all(key in request.json for key in ("groupCode","dispName","loc")) or not len(request.json["loc"]) == 2:
         abort(400) # Bad request
     #Validate group code
