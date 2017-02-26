@@ -19,7 +19,7 @@ def not_found(app, client, error):
 
 def home_page(app, client):
     if request.json:
-        return request.json, 200
+        return 200
     return jsonify({'response': "This is the home page for wander; please make a specific request"}), 200
 
 def joinGroup(app, groupClient, groupCode):

@@ -77,15 +77,6 @@ def groupUpdate(groupCode):
 def groupEnd(groupCode):
     return rh.groupEnd(app, groupClient, groupCode)
 
-####EXAMPLE####
-# Send an updated practical
-# Creates new user if none existing for that PERNR
-@app.route('/agents/<PERNR>/practicals/<practical>', methods=['POST'])
-@cross_origin()
-def save_practical(PERNR, practical):
-    return rh.save_practical(app, clients, PERNR, practical)
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
