@@ -14,6 +14,7 @@
 		C8B637C21E61F7B900E27F1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B637C01E61F7B900E27F1C /* LaunchScreen.storyboard */; };
 		C8B637CD1E61F7BA00E27F1C /* wanderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B637CC1E61F7BA00E27F1C /* wanderTests.swift */; };
 		C8B637D81E61F7BA00E27F1C /* wanderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B637D71E61F7BA00E27F1C /* wanderUITests.swift */; };
+		C8B637E71E62513400E27F1C /* wander.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8B637E61E62513400E27F1C /* wander.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		C8B637D31E61F7BA00E27F1C /* wanderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wanderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B637D71E61F7BA00E27F1C /* wanderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wanderUITests.swift; sourceTree = "<group>"; };
 		C8B637D91E61F7BA00E27F1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8B637E61E62513400E27F1C /* wander.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = wander.jpg; path = ../Assets/wander.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		C8B637AB1E61F7B900E27F1C = {
 			isa = PBXGroup;
 			children = (
+				C8B637E61E62513400E27F1C /* wander.jpg */,
 				C8B637B61E61F7B900E27F1C /* wander */,
 				C8B637CB1E61F7BA00E27F1C /* wanderTests */,
 				C8B637D61E61F7BA00E27F1C /* wanderUITests */,
@@ -234,6 +237,7 @@
 			files = (
 				C8B637C21E61F7B900E27F1C /* LaunchScreen.storyboard in Resources */,
 				C8B637BF1E61F7B900E27F1C /* Assets.xcassets in Resources */,
+				C8B637E71E62513400E27F1C /* wander.jpg in Resources */,
 				C8B637BD1E61F7B900E27F1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
