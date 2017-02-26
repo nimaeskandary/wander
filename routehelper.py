@@ -120,7 +120,9 @@ def updateLoc(app, groupClient):
 
     #Validate mem/leader
     for mem in memberLoc:
+        print("Trigger Distance: "+str(triggerDist), file=sys.stderr)
         if latlongdist(leaderLoc, mem["location"]) > float(triggerDist):
+            print("Lost!", file=sys.stderr)
             d["lostList"].append(mem["dispName"])
 
     #Return 200 & status for members
@@ -156,4 +158,5 @@ def latlongdist(a,b):
     c = 2 * math.atan2(math.sqrt(a),math.sqrt(1-a))
     d = rad * c
     d = d * 3280.84 #covert to feet
+    print("Calc dist: "+str(d), file=sys.stderr)
     return d
