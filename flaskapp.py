@@ -65,12 +65,6 @@ def createGroup():
 def updateLoc():
     return rh.updateLoc(app, groupClient)
 
-# Group Update
-@app.route('/groupUpdate/<groupCode>', methods=['GET'])
-@cross_origin()
-def groupUpdate(groupCode):
-    return rh.groupUpdate(app, groupClient, groupCode)
-
 # Group End
 @app.route('/groupEnd/<groupCode>', methods=['GET'])
 @cross_origin()

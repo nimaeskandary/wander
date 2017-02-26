@@ -97,18 +97,8 @@ def updateLoc(app, groupClient):
         abort(404)
     #Update document
     result = groupClient.db[request.json["groupCode"].upper()].replace_one({"groupName": doc["groupName"]},doc)
-    #Return 200
-    d = {}
-    d["status"] = "200"
-    return jsonify(d), 200
 
-def groupUpdate(app, groupClient, groupCode):
-    d = {}
-    d["lostList"] = []
-    d["status"] = ""
-    #Validate group code
-    if (not (groupCode in groupClient.db.collection_names())):
-        abort(404)
+    #Provide group update back
     #Check currently stored distance of members in group
     group = groupClient.db[request.json["groupCode"].upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
