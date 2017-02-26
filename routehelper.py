@@ -121,7 +121,7 @@ def updateLoc(app, groupClient):
     #Validate mem/leader
     for mem in memberLoc:
         if latlongdist(leaderLoc, mem["location"]) > float(triggerDist):
-            d["lostList"].append(mem)
+            d["lostList"].append(mem["dispName"])
 
     #Return 200 & status for members
     if len(d["lostList"]) == 0:
