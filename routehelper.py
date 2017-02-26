@@ -27,10 +27,10 @@ def joinGroup(app, groupClient, groupCode):
     if not request.json or not ("dispName" in request.json):
         abort(400) # Bad request
     #Validate group code in MONGO
-    if (not (groupCode in groupClient.db.collection_names())):
+    if (not (groupCode.upper() in groupClient.db.collection_names())):
         abort(404)
     #Add member to group in MONGO
-    group = groupClient.db[groupCode].find()
+    group = groupClient.db[groupCode.upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
     doc = group
@@ -38,8 +38,10 @@ def joinGroup(app, groupClient, groupCode):
     user["dispName"] = request.json["dispName"]
     user["level"] = "m"
     user["location"] = []
-    doc["memberList"].append(user)
-    result = groupClient.db[groupCode].replace_one({"groupName": doc["groupName"]},doc)
+    memberList = doc["memberList"]
+    memberList.append(user)
+    doc["memberList"] = memberList
+    result = groupClient.db[groupCode.upper()].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
     return 200
 
@@ -75,10 +77,10 @@ def updateLoc(app, groupClient):
     if not request.json or not all(key in request.json for key in ("groupCode","dispName","loc")) or not len(request.json["loc"]) == 2:
         abort(400) # Bad request
     #Validate group code
-    if (not (request.json["groupCode"] in groupClient.db.collection_names())):
+    if (not (request.json["groupCode"].upper() in groupClient.db.collection_names())):
         abort(404)
     #Update member location
-    group = groupClient.db[request.json["groupCode"]].find()
+    group = groupClient.db[request.json["groupCode"].upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
     doc = group
@@ -90,7 +92,7 @@ def updateLoc(app, groupClient):
         if item["dispName"] == request.json["dispName"]:
             item["loc"] = request.json["loc"]
     #Update document
-    result = groupClient.db[request.json["groupCode"]].replace_one({"groupName": doc["groupName"]},doc)
+    result = groupClient.db[request.json["groupCode"].upper()].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
     return 200
 
@@ -102,7 +104,7 @@ def groupUpdate(app, groupClient, groupCode):
     if (not (groupCode in groupClient.db.collection_names())):
         abort(404)
     #Check currently stored distance of members in group
-    group = groupClient.db[request.json["groupCode"]].find()
+    group = groupClient.db[request.json["groupCode"].upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
     #Get leader coords & member coords
