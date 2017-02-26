@@ -146,8 +146,7 @@ def groupEnd(app, groupClient, groupCode):
     return jsonify(d), 200
 
 def dist(a,b):
-    return math.sqrt((a[0]-b[0])^2 + (a[1]-b[1])^2)
-
+    return math.sqrt(math.pow((a[0]-b[0]), 2) + math.pow((a[1]-b[1]), 2))
 
 def latlongdist(a,b):
     rad = 6371
