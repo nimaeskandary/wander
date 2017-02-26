@@ -1,59 +1,101 @@
 #!/usr/bin/env python3
 # Morgan Wallace
 # 2017
+import random
+
+def after_request(app, client, response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
+
+def not_found(app, client, error):
+    return make_response(jsonify({'error': "Not Found"}), 404)
+
+def home_page(app, client):
+    return jsonify({'response': "This is the home page for wander; please make a specific request"})
 
 def joinGroup(app, groupClient, groupCode):
     if not request.json or not ("dispName" in request.json):
         abort(400) # Bad request
     #Validate group code in MONGO
+    if (not (groupCode in groupClient.db.collection_names())):
+        abort(404)
     #Add member to group in MONGO
+    group = groupClient.db[groupCode].find()
+    if group.count > 1: #too many listings or none (should not be encountered)
+        abort(400)
+    doc = group
+    user = {}
+    user["dispName"] = request.json["dispName"]
+    user["level"] = "m"
+    user["location"] = []
+    doc["memberList"].append(user)
+    result = groupClient.db[groupCode].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
+    return 200
 
 def createGroup(app, groupClient):
     if not request.json or not all(key in request.json for key in ("groupName","dispName","triggerDist")):
         abort(400) # Bad request
-    #
-
-
-####EXAMPLE####
-def save_practical(app, clients, PERNR, practical):
-    if not request.json or not all(key in request.json for key in ("components","practical","status","name","PERNR","dateEdited")):
-        abort(400) # Bad request
+    #Generate group code & validate not existing
     d = {}
-    d["agent"] = {}
-    d["sup"] = {}
-    now = datetime.datetime.now()
-    request.json["dateEdited"] = now.strftime("%m/%d/%Y")
-    # Add to agent database
-    user = clients["agentclient"].db[request.json["PERNR"]].find()
-    if user.count() == 0: # No documents for user
-        # Create new agent
-        p = {}
-        p['prnrID'] = request.json["PERNR"]
-        p['name'] = request.json["name"]
-        result = clients["agentclient"].db[PERNR].insert_one(p)
-    pracs = clients["agentclient"].db[PERNR].find({"practical": practical, "PERNR": request.json["PERNR"]}).count()
-    if pracs == 0:
-        result = clients["agentclient"].db[PERNR].insert_one(request.json)
-        d["agent"][PERNR] = "all clear"
-    elif pracs == 1:
-        result = clients["agentclient"].db[PERNR].replace_one({"practical": practical},request.json)
-        d["agent"][PERNR] = "all clear"
+    d["groupCode"] = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(4))
+    while d["groupCode"] in groupClient.db.collection_names():
+        d["groupCode"] = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(4))
+    #Create new Mongo document entry & add member to group
+    doc = {}
+    doc["groupCode"] = d["groupCode"]
+    doc["groupName"] = request.json["groupName"]
+    doc["triggerDist"] = request.json["triggerDist"]
+    if ("lostMessage" in request.json):
+        doc["lostMessage"] = request.json["lostMessage"]
     else:
-        d["agent"][PERNR] = "error adding %s practical" % practical # Too many practicals matching those results in DB (should never be hit unless specifically testing)
-    # Add to sup database
-    supsToUpdate = []
-    for component in request.json['components']:
-        if component["verified_by"] != "" and component["verified_by"] not in supsToUpdate:
-            supsToUpdate.append(component["verified_by"])
-    for sup in supsToUpdate:
-        pracs = clients["supclient"].db[sup].find({"practical": practical, "PERNR": request.json["PERNR"]}).count()
-        if pracs == 0:
-            result = clients["supclient"].db[sup].insert_one(request.json)
-            d["sup"][sup] = "all clear"
-        elif pracs == 1:
-            result = clients["supclient"].db[sup].replace_one({"practical": practical},request.json)
-            d["sup"][sup] = "all clear"
-        else:
-            d["sup"][sup] = "error adding %s practical" % practical # Too many practicals matching those results in DB (should never be hit unless specifically testing)
+        doc["lostMessage"] = "You've been separated from your group!"
+    memberList = []
+    leader = {}
+    leader["dispName"] = request.json["dispName"]
+    leader["level"] = "l"
+    leader["location"] = []
+    memberList.append(leader)
+    doc["memberList"] = memberList
+    result = groupClient.db[d["groupCode"]].insert_one(doc)
+    #Return 200 & group code
     return jsonify(d), 200
+
+def updateLoc(app, groupClient):
+    if not request.json or not all(key in request.json for key in ("groupCode","dispName","loc")) or not len(request.json["loc"]) == 2:
+        abort(400) # Bad request
+    #Validate group code
+    if (not (request.json["groupCode"] in groupClient.db.collection_names())):
+        abort(404)
+    #Update member location
+    group = groupClient.db[request.json["groupCode"]].find()
+    if group.count > 1: #too many listings or none (should not be encountered)
+        abort(400)
+    doc = group
+    #Validate member
+    if not request.json["dispName"] in doc["memberList"]:
+        abort(404)
+    #Update location for user
+    for item in doc["memberList"]:
+        if item["dispName"] == request.json["dispName"]:
+            item["loc"] = request.json["loc"]
+    #Update document
+    result = groupClient.db[request.json["groupCode"]].replace_one({"groupName": doc["groupName"]},doc)
+    #Return 200
+    return 200
+
+def groupUpdate(app, groupClient, groupCode):
+    #Check currently stored distance of members in group
+
+    #Return 200 & status for members
+
+def groupEnd(app, groupClient, groupCode):
+    #Validate group code
+    if (not (groupCode in groupClient.db.collection_names())):
+        abort(404)
+    #Remove collection
+    result = groupClient.db[groupCode].drop()
+    #Return 200
+    return 200
