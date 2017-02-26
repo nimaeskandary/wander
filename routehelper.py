@@ -87,14 +87,14 @@ def updateLoc(app, groupClient):
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
     doc = group.next()
-    #Validate member
-    if not request.json["dispName"] in doc["memberList"]:
-        print(doc["memberList"], file=sys.stderr)
-        abort(404)
-    #Update location for user
+    #Validate member & update location for user
+    found = False
     for item in doc["memberList"]:
         if item["dispName"] == request.json["dispName"]:
+            found = True
             item["loc"] = request.json["loc"]
+    if not found:
+        abort(404)
     #Update document
     result = groupClient.db[request.json["groupCode"].upper()].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
