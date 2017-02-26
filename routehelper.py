@@ -123,9 +123,6 @@ def updateLoc(app, groupClient):
         if latlongdist(leaderLoc, mem["location"]) > float(triggerDist):
             d["lostList"].append(mem)
 
-    #Remove later
-    d["lostList"] = ["person"]
-
     #Return 200 & status for members
     if len(d["lostList"]) == 0:
         d["status"] = "all clear"
