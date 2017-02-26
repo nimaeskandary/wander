@@ -129,7 +129,7 @@ def updateLoc(app, groupClient):
     else:
         d["status"] == str(len(d["lostList"])) + " are lost"
 
-    return 200, jsonify(d)
+    return jsonify(d), 200
 
 def groupEnd(app, groupClient, groupCode):
     #Validate group code
