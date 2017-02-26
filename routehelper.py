@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Morgan Wallace
 # 2017
-import random
+import random, math
 
 def after_request(app, client, response):
     response.headers.add('Access-Control-Allow-Origin', '*')
@@ -87,9 +87,39 @@ def updateLoc(app, groupClient):
     return 200
 
 def groupUpdate(app, groupClient, groupCode):
+    d = {}
+    d["lostList"] = []
+    d["status"] = ""
+    #Validate group code
+    if (not (groupCode in groupClient.db.collection_names())):
+        abort(404)
     #Check currently stored distance of members in group
+    group = groupClient.db[request.json["groupCode"]].find()
+    if group.count > 1: #too many listings or none (should not be encountered)
+        abort(400)
+    #Get leader coords & member coords
+    leaderLoc = []
+    memberLoc = []
+    triggerDist = group["triggerDist"]
+    origList = group["memberList"]
+    for item in origList:
+        if item["level"] == "m":
+            memberLoc.append(item)
+        else:
+            leaderLoc = item["location"]
+
+    #Validate mem/leader
+    for mem in memberLoc:
+        if dist(leaderLoc, mem["location"]) > triggerDist:
+            d["lostList"].append(mem)
 
     #Return 200 & status for members
+    if len(d["lostList"]) == 0:
+        d["status"] = "all clear"
+    else:
+        d["status"] == str(len(d["lostList"])) + " are lost"
+        
+    return 200, jsonify(d)
 
 def groupEnd(app, groupClient, groupCode):
     #Validate group code
@@ -99,3 +129,6 @@ def groupEnd(app, groupClient, groupCode):
     result = groupClient.db[groupCode].drop()
     #Return 200
     return 200
+
+def dist(a,b):
+    return math.sqrt((a[0]-b[0])^2 + (a[1]-b[1])^2)
