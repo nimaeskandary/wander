@@ -120,8 +120,11 @@ def updateLoc(app, groupClient):
 
     #Validate mem/leader
     for mem in memberLoc:
-        if dist(leaderLoc, mem["location"]) > triggerDist:
+        if latlongdist(leaderLoc, mem["location"]) > float(triggerDist):
             d["lostList"].append(mem)
+
+    #Remove later
+    d["lostList"] = ["person"]
 
     #Return 200 & status for members
     if len(d["lostList"]) == 0:
@@ -144,3 +147,17 @@ def groupEnd(app, groupClient, groupCode):
 
 def dist(a,b):
     return math.sqrt((a[0]-b[0])^2 + (a[1]-b[1])^2)
+
+
+def latlongdist(a,b):
+    rad = 6371
+    latdiff = b[0] - a[0]
+    dlat = latdiff * (math.pi/180.0)
+    longdiff = b[1] - a[1]
+    dlong = longdiff * (math.pi/180.0)
+
+    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(a[0]*math.pi/180.0) * math.cos(b[0]*math.pi/180.0) * math.sin(dlong/2) * math.sin(dlong/2)
+    c = 2 * math.atan2(math.sqrt(a),math.sqrt(1-a))
+    d = rad * c
+    d = d * 3280.84 #covert to feet
+    return d
