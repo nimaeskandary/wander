@@ -16,6 +16,7 @@
 		17968A791E623960001DEEA4 /* wanderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17968A781E623960001DEEA4 /* wanderUITests.swift */; };
 		567F8798C172C77D6709BD3C /* Pods_wanderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB0F3A01E35AE4CCA29D0B3 /* Pods_wanderTests.framework */; };
 		95FDDF51D03BBA41D0C46FF0 /* Pods_wander.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2219E0B3373751C0EC629D /* Pods_wander.framework */; };
+		C8B637E91E62B9CA00E27F1C /* logo.jpg.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B637E81E62B9CA00E27F1C /* logo.jpg.png */; };
 		E47D193D0A920E05DEFA38F4 /* Pods_wanderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD9592245F1CC217FAE448F /* Pods_wanderUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		8D2219E0B3373751C0EC629D /* Pods_wander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDD40B6790F218BD78707 /* Pods-wanderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wanderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wanderUITests/Pods-wanderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		956BE79579562886EB61323F /* Pods-wanderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wanderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wanderTests/Pods-wanderTests.release.xcconfig"; sourceTree = "<group>"; };
+		C8B637E81E62B9CA00E27F1C /* logo.jpg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.jpg.png; sourceTree = SOURCE_ROOT; };
 		DE0550603D358FDEB01F95B8 /* Pods-wanderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wanderUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wanderUITests/Pods-wanderUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FB8E52CCFD9C8A4863A096 /* Pods-wanderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wanderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wanderTests/Pods-wanderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EDD9592245F1CC217FAE448F /* Pods_wanderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wanderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				17968A581E62395F001DEEA4 /* AppDelegate.swift */,
 				17968A5A1E62395F001DEEA4 /* ViewController.swift */,
 				17968A5C1E62395F001DEEA4 /* Main.storyboard */,
+				C8B637E81E62B9CA00E27F1C /* logo.jpg.png */,
 				17968A5F1E62395F001DEEA4 /* Assets.xcassets */,
 				17968A611E62395F001DEEA4 /* LaunchScreen.storyboard */,
 				17968A641E62395F001DEEA4 /* Info.plist */,
@@ -298,6 +301,7 @@
 				17968A631E62395F001DEEA4 /* LaunchScreen.storyboard in Resources */,
 				17968A601E62395F001DEEA4 /* Assets.xcassets in Resources */,
 				17968A5E1E62395F001DEEA4 /* Main.storyboard in Resources */,
+				C8B637E91E62B9CA00E27F1C /* logo.jpg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
