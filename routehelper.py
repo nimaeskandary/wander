@@ -33,7 +33,7 @@ def joinGroup(app, groupClient, groupCode):
     group = groupClient.db[groupCode.upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
-    doc = group
+    doc = group.next()
     user = {}
     user["dispName"] = request.json["dispName"]
     user["level"] = "m"
@@ -83,7 +83,7 @@ def updateLoc(app, groupClient):
     group = groupClient.db[request.json["groupCode"].upper()].find()
     if group.count() > 1: #too many listings or none (should not be encountered)
         abort(400)
-    doc = group
+    doc = group.next()
     #Validate member
     if not request.json["dispName"] in doc["memberList"]:
         abort(404)
@@ -110,8 +110,9 @@ def groupUpdate(app, groupClient, groupCode):
     #Get leader coords & member coords
     leaderLoc = []
     memberLoc = []
-    triggerDist = group["triggerDist"]
-    origList = group["memberList"]
+    doc = group.next()
+    triggerDist = doc["triggerDist"]
+    origList = doc["memberList"]
     for item in origList:
         if item["level"] == "m":
             memberLoc.append(item)
