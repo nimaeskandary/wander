@@ -42,7 +42,7 @@ def not_found(error):
     return rh.not_found(app, groupClient, error)
 
 # Home Page (unused)
-@app.route('/', methods=['GET', 'OPTIONS'])
+@app.route('/', methods=['GET', 'OPTIONS', 'POST'])
 @cross_origin()
 def home_page():
     return rh.home_page(app, groupClient)

@@ -18,7 +18,9 @@ def not_found(app, client, error):
     return make_response(jsonify({'error': "Not Found"}), 404)
 
 def home_page(app, client):
-    return jsonify({'response': "This is the home page for wander; please make a specific request"})
+    if request.json:
+        return request.json, 200
+    return jsonify({'response': "This is the home page for wander; please make a specific request"}), 200
 
 def joinGroup(app, groupClient, groupCode):
     if not request.json or not ("dispName" in request.json):
