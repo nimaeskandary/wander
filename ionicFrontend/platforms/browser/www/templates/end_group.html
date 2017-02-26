@@ -1,0 +1,27 @@
+<ion-view>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Group Name</span>
+        <input type="text" ng-model="group.groupName" placeholder="Codefest Philly" disabled>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Your Name</span>
+        <input type="text" ng-model="group.dispName" placeholder="Robbie" disabled>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Group Code</span>
+        <input type="text" ng-model="group.groupCode" placeholder="Robbie" disabled>
+      </label>
+    </div>
+    <div class="padding">
+        <button class="button button-block button-assertive" on-touch="destroy()">End Group</button>
+    </div>
+    <div class="padding" ng-show="lost">
+      <button class="button button-full button-assertive">
+        {{ message }}
+      </button>
+    </div>
+  </ion-content>
+</ion-view>
+

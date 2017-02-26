@@ -1,0 +1,22 @@
+<ion-view>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Group Name</span>
+        <input type="text" ng-model="group.groupName" placeholder="Codefest Philly">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Your Name</span>
+        <input type="text" ng-model="group.dispName" placeholder="Robbie">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Trigger Distance(in ft)</span>
+        <input type="text" ng-model="group.triggerDist" placeholder="40">
+      </label>
+    </div>
+    <div class="padding">
+        <button class="button button-block button-positive" on-touch="create()">Create Group</button>
+    </div>
+  </ion-content>
+</ion-view>
+
