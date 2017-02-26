@@ -43,7 +43,9 @@ def joinGroup(app, groupClient, groupCode):
     doc["memberList"] = memberList
     result = groupClient.db[groupCode.upper()].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
-    return 200
+    d = {}
+    d["status"] = "200"
+    return jsonify(d), 200
 
 def createGroup(app, groupClient):
     if not request.json or not all(key in request.json for key in ("groupName","dispName","triggerDist")):
@@ -94,7 +96,9 @@ def updateLoc(app, groupClient):
     #Update document
     result = groupClient.db[request.json["groupCode"].upper()].replace_one({"groupName": doc["groupName"]},doc)
     #Return 200
-    return 200
+    d = {}
+    d["status"] = "200"
+    return jsonify(d), 200
 
 def groupUpdate(app, groupClient, groupCode):
     d = {}
@@ -139,7 +143,9 @@ def groupEnd(app, groupClient, groupCode):
     #Remove collection
     result = groupClient.db[groupCode].drop()
     #Return 200
-    return 200
+    d = {}
+    d["status"] = "200"
+    return jsonify(d), 200
 
 def dist(a,b):
     return math.sqrt((a[0]-b[0])^2 + (a[1]-b[1])^2)
