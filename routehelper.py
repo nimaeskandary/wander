@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Morgan Wallace
 # 2017
-import random, math
+import random, math, string
 from flask import Flask, make_response, jsonify, request, abort, current_app
 from flask_pymongo import PyMongo
 import json
