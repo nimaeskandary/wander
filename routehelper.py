@@ -120,7 +120,7 @@ def updateLoc(app, groupClient):
 
     #Validate mem/leader
     for mem in memberLoc:
-        if dist(leaderLoc, mem["location"]) > triggerDist:
+        if dist(leaderLoc, mem["location"]) > float(triggerDist):
             d["lostList"].append(mem)
 
     #Return 200 & status for members
@@ -128,7 +128,8 @@ def updateLoc(app, groupClient):
         d["status"] = "all clear"
     else:
         d["status"] == str(len(d["lostList"])) + " are lost"
-
+	
+    d['lostList'] = ["person"]
     return jsonify(d), 200
 
 def groupEnd(app, groupClient, groupCode):
@@ -143,4 +144,4 @@ def groupEnd(app, groupClient, groupCode):
     return jsonify(d), 200
 
 def dist(a,b):
-    return math.sqrt((a[0]-b[0])^2 + (a[1]-b[1])^2)
+    return math.sqrt(math.pow((a[0]-b[0]), 2) + math.pow((a[1]-b[1]), 2))
