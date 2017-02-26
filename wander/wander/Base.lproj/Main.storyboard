@@ -206,7 +206,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your group code is (groupCode). Members of your group must enter this code in order to join." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JJ-j0-VRH">
-                                <rect key="frame" x="30" y="320" width="314" height="180"/>
+                                <rect key="frame" x="30" y="279" width="314" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
@@ -216,6 +216,11 @@
                                 <rect key="frame" x="113" y="65" width="148" height="161"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vy5-Dk-ewH">
+                                <rect key="frame" x="103" y="523" width="168" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="End Session"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.84264063840000003" green="0.8544812799" blue="0.88348513839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -223,35 +228,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaE-HQ-naE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-44" y="406.14692653673166"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="QG6-sm-VRB">
-            <objects>
-                <viewController id="b5X-nn-X9d" customClass="ViewController" customModule="wander" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fFb-ou-YB5"/>
-                        <viewControllerLayoutGuide type="bottom" id="Tnz-te-H4e"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1Tl-Yn-Q1x">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wander.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="KCd-Ss-DUC">
-                                <rect key="frame" x="113" y="65" width="148" height="161"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPT-9l-CT2">
-                                <rect key="frame" x="62" y="390" width="251" height="82"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="End Group"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.84264063840000003" green="0.8544812799" blue="0.88348513839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ruJ-10-orj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-44" y="1126.6866566716642"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CVM-if-b1o">
