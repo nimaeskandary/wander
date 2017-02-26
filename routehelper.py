@@ -2,6 +2,11 @@
 # Morgan Wallace
 # 2017
 import random, math
+from flask import Flask, make_response, jsonify, request, abort, current_app
+from flask_pymongo import PyMongo
+import json
+from bson import ObjectId
+from flask_cors import CORS
 
 def after_request(app, client, response):
     response.headers.add('Access-Control-Allow-Origin', '*')
@@ -118,7 +123,7 @@ def groupUpdate(app, groupClient, groupCode):
         d["status"] = "all clear"
     else:
         d["status"] == str(len(d["lostList"])) + " are lost"
-        
+
     return 200, jsonify(d)
 
 def groupEnd(app, groupClient, groupCode):
